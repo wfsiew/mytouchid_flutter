@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text('${_deviceData['androidId']}'),
+            Text("${_deviceData['androidId']}"),
             Text('Can check biometrics: $_canCheckBiometrics\n'),
             RaisedButton(
               child: const Text('Check biometrics'),
