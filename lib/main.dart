@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       if (Platform.isAndroid) {
         deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
       } else if (Platform.isIOS) {
-        //deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
+        deviceData = _readIosDeviceInfo(await deviceInfoPlugin.iosInfo);
       }
     } on PlatformException {
       deviceData = <String, dynamic>{
@@ -121,6 +121,23 @@ class _MyHomePageState extends State<MyHomePage> {
       'isPhysicalDevice': build.isPhysicalDevice,
       'androidId': build.androidId,
       'systemFeatures': build.systemFeatures,
+    };
+  }
+
+  Map<String, dynamic> _readIosDeviceInfo(IosDeviceInfo data) {
+    return <String, dynamic>{
+      'name': data.name,
+      'systemName': data.systemName,
+      'systemVersion': data.systemVersion,
+      'model': data.model,
+      'localizedModel': data.localizedModel,
+      'identifierForVendor': data.identifierForVendor,
+      'isPhysicalDevice': data.isPhysicalDevice,
+      'utsname.sysname:': data.utsname.sysname,
+      'utsname.nodename:': data.utsname.nodename,
+      'utsname.release:': data.utsname.release,
+      'utsname.version:': data.utsname.version,
+      'utsname.machine:': data.utsname.machine,
     };
   }
 
@@ -201,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text("${_deviceData['androidId']}"),
+            Text("${_deviceData['identifierForVendor']}"),
             Text('Can check biometrics: $_canCheckBiometrics\n'),
             RaisedButton(
               child: const Text('Check biometrics'),
